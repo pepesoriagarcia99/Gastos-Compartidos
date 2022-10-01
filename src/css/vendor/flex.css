@@ -1,0 +1,6 @@
+
+.horizontal_list {
+  /* display: inline; */
+  align-items: stretch;
+  width: 100%;
+}
