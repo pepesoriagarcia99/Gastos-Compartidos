@@ -1,20 +1,13 @@
 import React from "react";
 import styles from "../../css/modules/Button.module.css";
 
-// import {
-//   RiCloseLine,
-//   RiAddFill,
-//   RiDeleteBin6Line,
-//   RiQuestionLine,
-// } from "react-icons/ri";
 
 type Props = {
   text?: string;
   icon?: any;
   type?: string;
-  handle: Function;
+  handler: Function;
 };
-
 
 export default class Button extends React.Component<Props, {}> {
   render() {
@@ -25,7 +18,7 @@ export default class Button extends React.Component<Props, {}> {
     return (
       <button
         className={`${type ? styles[type] : ""}`}
-        onClick={() => this.props.handle()}
+        onClick={() => this.props.handler()}
       >
         {text ? text : icon}
       </button>

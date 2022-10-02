@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './css/app.css';
-import "./css/vendor/flex.css";
 
 import Home from './views/Home';
 

@@ -1,8 +1,9 @@
 import React from "react";
-import { RiCloseLine } from "react-icons/ri";
+// import { RiCloseLine } from "react-icons/ri";
 
-import dialogStyles from "../../../css/modules/Dialog.module.css";
-import formStyles from "../../../css/modules/Form.module.css";
+// import dialogStyles from "../../../css/modules/Dialog.module.css";
+// import formStyles from "../../../css/modules/Form.module.css";
+import GenericDialog from "../../molecules/dialogs/GenericDialog";
 
 import User from "../../../models/User";
 import Button from "../../atoms/Button";
@@ -36,8 +37,8 @@ export default class CreateExpense extends React.Component<Props, State> {
       event.target
     );
 
-    const name = event.target.name;
-    const value = event.target.value;
+    // const name = event.target.name;
+    // const value = event.target.value;
     // console.log("🚀 ~ file: CreateExpense.tsx ~ line 30 ~ CreateExpense ~ handleChange ~ value", value)
     // console.log("🚀 ~ file: CreateExpense.tsx ~ line 29 ~ CreateExpense ~ handleChange ~ name", name)
 
@@ -54,75 +55,40 @@ export default class CreateExpense extends React.Component<Props, State> {
     console.log("An essay was submitted: ", form);
 
     this.props.submit(form);
-
-    // event.preventDefault();
   }
 
   render() {
     return (
-      <>
-        <div className={dialogStyles.outside} onClick={() => this.props.close()} />
-        <div className={dialogStyles.centered}>
-          <div className={dialogStyles.modal}>
-            <div className={dialogStyles.header}>
-              <h5 className={dialogStyles.header_tittle}>Create expense</h5>
-            </div>
-            <div className={dialogStyles.close}>
-              <Button
-                icon={<RiCloseLine />}
-                handle={() => this.props.close()}
-              ></Button>
-            </div>
+      <GenericDialog
+        title="Create expense"
+        close={this.props.close}
+        content={
+          <form>
+            <label>Description</label>
+            <input
+              name="description"
+              type="text"
+              value={this.state.description}
+              onChange={this.handleChange}
+            />
 
-            <div className={dialogStyles.content}>
-              {/* onSubmit={this.handleSubmit} */}
-              <form>
-                <label>Description</label>
-                <input
-                  name="description"
-                  type="text"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-
-                <label>Amount</label>
-                <input
-                  name="amount"
-                  type="number"
-                  value={this.state.amount}
-                  onChange={this.handleChange}
-                />
-
-                {/* <input type="submit" value="Submit" /> */}
-              </form>
-            </div>
-            {/* <div className={styles.modalContent}>
-              Are you sure you want to delete the item?
-            </div> */}
-            <div className={dialogStyles.actions}>
-              <div className={dialogStyles.actions_container}>
-                <Button
-                  text="Submit"
-                  type="primary"
-                  handle={() => this.handleSubmit()}
-                ></Button>
-                {/* <button
-                  className={styles.deleteBtn}
-                  onClick={() => this.props.close()}
-                >
-                  Cancel
-                </button>
-                <button
-                  className={styles.cancelBtn}
-                  onClick={() => this.props.close}
-                >
-                  Cancel
-                </button> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
+            <label>Amount</label>
+            <input
+              name="amount"
+              type="number"
+              value={this.state.amount}
+              onChange={this.handleChange}
+            />
+          </form>
+        }
+        actions={
+          <Button
+            text="Submit"
+            type="primary"
+            handler={() => this.handleSubmit()}
+          ></Button>
+        }
+      ></GenericDialog>
     );
   }
 }

@@ -7,29 +7,6 @@ button {
   font-size: 18px;
 }
 
-.floating-button {
-}
-
-.icon-button {
-  cursor: pointer;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 8px;
-  border: none;
-  font-size: 18px;
-  color: #000000;
-  background: white;
-  transition: all 0.25s ease;
-  position: absolute;
-  right: 0;
-  top: 0;
-  align-self: flex-end;
-}
-
-.icon-button:hover {
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-}
-
 .primary {
   background: #007bff;
   color: #fff;

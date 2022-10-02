@@ -1,24 +1,26 @@
 import React from "react";
-import "../../css/components/avatar.css";
+import styles from "../../css/components/Avatar.module.css";
 
 import User from "../../models/User";
 
 type Props = {
   user: User;
+  userDetail?: Function;
 };
 
 export default class Avatar extends React.Component<Props> {
-  user: User;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.user = props.user;
-  }
-
   render() {
+    const user = this.props.user;
+
     return (
-      <img className="Avatar" src={this.user.avatar} alt={this.user.name} />
+      <div
+        className={styles.detail}
+        onClick={() => {
+          this.props.userDetail && this.props.userDetail(true);
+        }}
+      >
+        <img className={styles.avatar_img} src={user.avatar} alt={user.name} />
+      </div>
     );
   }
 }
