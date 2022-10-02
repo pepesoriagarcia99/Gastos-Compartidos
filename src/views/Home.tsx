@@ -16,6 +16,7 @@ import UserDetail from "../components/molecules/dialogs/UserDetail";
 import Button from "../components/atoms/Button";
 import SearchBar from "../components/atoms/SearchBar";
 import ExpenseDetail from "../components/molecules/dialogs/ExpenseDetail";
+import { ButtonType } from "../interfaces/Button.interface";
 
 /** Mocks */
 const user = new User("Jose Eduardo");
@@ -116,6 +117,7 @@ export default class Home extends React.Component<{}, State> {
         <div className={styles.btn_flotante}>
           <Button
             icon={<RiAddFill />}
+            type={ButtonType.Primary}
             handler={() => this.changeStateCreateExpense(true)}
           ></Button>
         </div>
@@ -130,6 +132,7 @@ export default class Home extends React.Component<{}, State> {
 
         {this.state.userDetailIsActive && (
           <UserDetail
+            user={this.user}
             close={() => this.changeStateUserDetail(false)}
           ></UserDetail>
         )}

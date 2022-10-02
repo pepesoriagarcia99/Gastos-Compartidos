@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "../../css/modules/Button.module.css";
 
+import { ButtonType } from "../../interfaces/Button.interface";
+
 
 type Props = {
   text?: string;
   icon?: any;
-  type?: string;
+  type?: ButtonType;
   handler: Function;
 };
 

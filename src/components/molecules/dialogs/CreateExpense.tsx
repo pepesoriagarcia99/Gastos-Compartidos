@@ -1,12 +1,10 @@
 import React from "react";
-// import { RiCloseLine } from "react-icons/ri";
 
-// import dialogStyles from "../../../css/modules/Dialog.module.css";
-// import formStyles from "../../../css/modules/Form.module.css";
 import GenericDialog from "../../molecules/dialogs/GenericDialog";
 
 import User from "../../../models/User";
 import Button from "../../atoms/Button";
+import { ButtonType } from "../../../interfaces/Button.interface";
 
 type State = {
   description: string;
@@ -84,7 +82,7 @@ export default class CreateExpense extends React.Component<Props, State> {
         actions={
           <Button
             text="Submit"
-            type="primary"
+            type={ButtonType.Primary}
             handler={() => this.handleSubmit()}
           ></Button>
         }

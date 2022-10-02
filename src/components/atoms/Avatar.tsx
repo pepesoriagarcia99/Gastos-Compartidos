@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "../../css/components/Avatar.module.css";
+import { AvatarSize } from "../../interfaces/Avatar.interface";
 
 import User from "../../models/User";
 
 type Props = {
   user: User;
   userDetail?: Function;
+  size: AvatarSize;
 };
 
 export default class Avatar extends React.Component<Props> {
@@ -19,7 +21,7 @@ export default class Avatar extends React.Component<Props> {
           this.props.userDetail && this.props.userDetail(true);
         }}
       >
-        <img className={styles.avatar_img} src={user.avatar} alt={user.name} />
+        <img className={styles[this.props.size]} src={user.avatar} alt={user.name} />
       </div>
     );
   }

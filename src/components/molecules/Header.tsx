@@ -4,6 +4,7 @@ import styles from "../../css/components/Header.module.css";
 
 import Avatar from "../atoms/Avatar";
 import User from "../../models/User";
+import { AvatarSize } from "../../interfaces/Avatar.interface";
 
 type Props = {
   user: User;
@@ -24,7 +25,7 @@ export default class Header extends React.Component<Props> {
       <div className={styles.header}>
         <div className={styles.container}>
           <h2 className={styles.title}>Gastos Compartidos</h2>
-            <Avatar user={this.user} userDetail={this.props.userDetail}></Avatar>
+            <Avatar size={AvatarSize.xs} user={this.user} userDetail={this.props.userDetail}></Avatar>
         </div>
       </div>
     );
