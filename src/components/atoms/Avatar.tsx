@@ -1,17 +1,24 @@
-import './avatar.css';
+import React from "react";
+import "../../css/components/avatar.css";
 
-import User from "../../interfaces/User.interface";
+import User from "../../models/User";
 
 type Props = {
   user: User;
 };
 
-export default function Avatar({ user }: Props) {
-  
-  return (
-    <img className="Avatar"
-      src={user.avatar}
-      alt={user.name}
-    />
-  );
+export default class Avatar extends React.Component<Props> {
+  user: User;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.user = props.user;
+  }
+
+  render() {
+    return (
+      <img className="Avatar" src={this.user.avatar} alt={this.user.name} />
+    );
+  }
 }

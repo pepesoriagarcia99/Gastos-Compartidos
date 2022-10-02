@@ -1,18 +1,19 @@
 import { uuid } from "../utils/Tools";
+import User from "./User";
 
 export default class Expense {
   id: string;
-  creator: string;
+  creator: User;
   description: string;
   date: Date;
   amount: number;
-  friends: Array<string>;
+  friends: Array<User>;
 
   constructor(
-    creator: string,
+    creator: User,
     description: string,
     amount: number,
-    friends: Array<string>
+    friends: Array<User>
   ) {
     this.id = uuid();
     this.creator = creator;

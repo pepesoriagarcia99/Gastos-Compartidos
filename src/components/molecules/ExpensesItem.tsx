@@ -1,5 +1,5 @@
 import React from "react";
-import Expanse from '../../interfaces/Expense.interface'
+import Expanse from '../../models/Expense'
 
 type Props = {
   expanse: Expanse;

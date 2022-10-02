@@ -1,6 +1,13 @@
 
 .horizontal_list {
-  /* display: inline; */
-  align-items: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
+
+.horizontal_list > * {
+  margin: 8px;
+}
+
+
