@@ -62,17 +62,19 @@ export default class UserDetail extends React.Component<Props, State> {
             <Avatar user={this.props.user} size={AvatarSize.lg}></Avatar>
 
             <div className={style.friends}>
-              <span className={style.active}>Friends</span>
+              <div className={style.active}>Friends</div>
               {this.props.user.friends.map((friend) => (
-                <span>
+                <div>
                   {friend.name}
+
+                  <span>-5€</span>
 
                   <Button
                     icon={<RiDeleteBinFill style={{ marginBottom: "-3px" }} />}
                     type={ButtonType.danger}
                     handler={() => this.deleteFriend(friend.id)}
                   ></Button>
-                </span>
+                </div>
               ))}
 
               <form onSubmit={(event) => event.preventDefault()}>
@@ -91,8 +93,6 @@ export default class UserDetail extends React.Component<Props, State> {
                 ></Button>
               </form>
             </div>
-
-            <h4>Balance</h4>
           </div>
         }
       ></GenericDialog>

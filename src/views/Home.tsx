@@ -6,6 +6,12 @@ import styles from "../css/views/Home.module.css";
 /** Models */
 import User from "../models/User";
 import Expense from "../models/Expense";
+import { ButtonType } from "../interfaces/Button.interface";
+
+/** Services */
+import ExpenseService, {
+  ExpenseServiceType,
+} from "../services/Expenses.service";
 
 /** components */
 import Header from "../components/molecules/Header";
@@ -14,8 +20,6 @@ import CreateExpense from "../components/molecules/dialogs/CreateExpense";
 import UserDetail from "../components/molecules/dialogs/UserDetail";
 import Button from "../components/atoms/Button";
 import SearchBar from "../components/atoms/SearchBar";
-import ExpenseDetail from "../components/molecules/dialogs/ExpenseDetail";
-import { ButtonType } from "../interfaces/Button.interface";
 
 /** Mocks */
 const user = new User("Jose Eduardo");
@@ -27,31 +31,33 @@ user.addFriend(pedro);
 user.addFriend(cristina);
 user.addFriend(juan);
 
-const expense1 = new Expense(pedro, "Cafe", 3.5);
-const expense2 = new Expense(user, "Cena", 13.2);
-
 type State = {
   createExpenseIsActive: boolean;
   userDetailIsActive: boolean;
-  ExpenseDetailIsActive: boolean;
 
+  searchValue?: string;
   expenses: Array<Expense>;
   selectedExpense?: Expense;
   filteredExpenses: Array<Expense>;
 };
 
 export default class Home extends React.Component<{}, State> {
-  user: User;
-
   state: State = {
     createExpenseIsActive: false,
     userDetailIsActive: false,
-    ExpenseDetailIsActive: false,
 
-    expenses: [expense1, expense2],
+    searchValue: undefined,
+    expenses: [],
     selectedExpense: undefined,
     filteredExpenses: [],
   };
+
+  user: User;
+  expensesService: ExpenseServiceType = new ExpenseService(
+    user,
+    pedro,
+    cristina
+  );
 
   constructor(props: {}) {
     super(props);
@@ -60,10 +66,18 @@ export default class Home extends React.Component<{}, State> {
 
     this.changeStateCreateExpense = this.changeStateCreateExpense.bind(this);
     this.changeStateUserDetail = this.changeStateUserDetail.bind(this);
-    this.changeStateExpenseDetail = this.changeStateExpenseDetail.bind(this);
 
     this.createNewExpense = this.createNewExpense.bind(this);
     this.search = this.search.bind(this);
+  }
+
+  componentDidMount() {
+    this.expensesService
+      .getExpenses(this.user.id)
+      .then((response) => {
+        this.setState({ expenses: response });
+      })
+      .catch(console.error);
   }
 
   changeStateCreateExpense(state: boolean = false): void {
@@ -72,10 +86,6 @@ export default class Home extends React.Component<{}, State> {
 
   changeStateUserDetail(state: boolean = false): void {
     this.setState({ userDetailIsActive: state });
-  }
-
-  changeStateExpenseDetail(state: boolean = false, expense?: Expense): void {
-    this.setState({ ExpenseDetailIsActive: state, selectedExpense: expense });
   }
 
   createNewExpense(description: string, amount: number): void {
@@ -94,15 +104,15 @@ export default class Home extends React.Component<{}, State> {
         .filter((exp) =>
           exp.description.toLowerCase().includes(value.toLowerCase())
         );
-      this.setState({ filteredExpenses });
+      this.setState({ filteredExpenses, searchValue: value });
     } else {
-      this.setState({ filteredExpenses: [] });
+      this.setState({ filteredExpenses: [], searchValue: undefined });
     }
   }
 
   render() {
     const auxExpenses =
-      this.state.filteredExpenses.length > 0
+      this.state.filteredExpenses.length > 0 || this.state.searchValue
         ? this.state.filteredExpenses
         : this.state.expenses;
 
@@ -120,11 +130,11 @@ export default class Home extends React.Component<{}, State> {
           <SearchBar searchAction={this.search}></SearchBar>
         </div>
         <div className={styles.container}>
-          <ExpensesList
-            user={this.user}
-            expenses={expenses}
-            detail={this.changeStateExpenseDetail}
-          ></ExpensesList>
+          {expenses.length > 0 ? (
+            <ExpensesList user={this.user} expenses={expenses}></ExpensesList>
+          ) : (
+            <span>You still have no expenses</span>
+          )}
         </div>
 
         <div className={styles.btn_flotante}>
@@ -148,13 +158,6 @@ export default class Home extends React.Component<{}, State> {
             user={this.user}
             close={() => this.changeStateUserDetail(false)}
           ></UserDetail>
-        )}
-
-        {this.state.ExpenseDetailIsActive && (
-          <ExpenseDetail
-            expense={this.state.selectedExpense}
-            handler={this.changeStateExpenseDetail}
-          ></ExpenseDetail>
         )}
       </div>
     );

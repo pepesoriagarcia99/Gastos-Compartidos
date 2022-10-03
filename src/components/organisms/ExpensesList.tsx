@@ -9,7 +9,6 @@ import ExpanseItem from "../molecules/ExpensesItem";
 type Props = {
   user: User;
   expenses: Array<Expanse>;
-  detail: Function;
 };
 
 export default class ExpensesList extends React.Component<Props> {
@@ -17,7 +16,7 @@ export default class ExpensesList extends React.Component<Props> {
     return (
       <div className={styles.list}>
         {this.props.expenses.map((exp) => (
-          <div onClick={() => this.props.detail(true, exp)}>
+          <div>
             <ExpanseItem key={exp.id} user={this.props.user} expense={exp} />
           </div>
         ))}
