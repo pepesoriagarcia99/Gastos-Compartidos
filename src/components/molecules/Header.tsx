@@ -24,7 +24,7 @@ export default class Header extends React.Component<Props> {
     return (
       <div className={styles.header}>
         <div className={styles.container}>
-          <h2 className={styles.title}>Gastos Compartidos</h2>
+          <h2 className={styles.title}>Shared expenses</h2>
             <Avatar size={AvatarSize.xs} user={this.user} userDetail={this.props.userDetail}></Avatar>
         </div>
       </div>

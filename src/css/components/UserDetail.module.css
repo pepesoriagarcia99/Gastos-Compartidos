@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.friends {
+  margin-top: 8px;
+  width: 90%;
+}
+
 .friends span {
   background-color: #eee;
   display: flex;
@@ -21,4 +26,10 @@
   color: white;
 }
 
+form {
+  margin-top: 6px;
+}
 
+input {
+  width: 100%;
+}

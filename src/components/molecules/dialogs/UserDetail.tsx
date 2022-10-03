@@ -12,7 +12,6 @@ import GenericDialog from "../../molecules/dialogs/GenericDialog";
 import Avatar from "../../atoms/Avatar";
 import Button from "../../atoms/Button";
 
-
 type State = {
   friends: Array<User>;
   nameNewFriend: string;
@@ -92,6 +91,8 @@ export default class UserDetail extends React.Component<Props, State> {
                 ></Button>
               </form>
             </div>
+
+            <h4>Balance</h4>
           </div>
         }
       ></GenericDialog>
