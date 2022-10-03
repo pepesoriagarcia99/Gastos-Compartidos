@@ -28,8 +28,8 @@ user.addFriend(pedro);
 user.addFriend(cristina);
 user.addFriend(juan);
 
-const expense1 = new Expense(pedro, "Cafe", 3.50);
-const expense2 = new Expense(user, "Cena", 13.20);
+const expense1 = new Expense(pedro, "Cafe", 3.5);
+const expense2 = new Expense(user, "Cena", 13.2);
 
 type State = {
   createExpenseIsActive: boolean;
@@ -49,7 +49,7 @@ export default class Home extends React.Component<{}, State> {
     ExpenseDetailIsActive: false,
 
     expenses: [expense1, expense2],
-    selectedExpense: undefined
+    selectedExpense: undefined,
   };
 
   constructor(props: {}) {
@@ -76,10 +76,7 @@ export default class Home extends React.Component<{}, State> {
     this.setState({ ExpenseDetailIsActive: state, selectedExpense: expense });
   }
 
-  createNewExpense(
-    description: string,
-    amount: number
-  ): void {
+  createNewExpense(description: string, amount: number): void {
     const newExpense = new Expense(this.user, description, amount);
     const current = this.state.expenses;
 
@@ -108,15 +105,15 @@ export default class Home extends React.Component<{}, State> {
         </div>
         <div className={styles.container}>
           <ExpensesList
-          user={this.user}
-          expenses={expenses}
-          detail={this.changeStateExpenseDetail}
+            user={this.user}
+            expenses={expenses}
+            detail={this.changeStateExpenseDetail}
           ></ExpensesList>
         </div>
 
         <div className={styles.btn_flotante}>
           <Button
-            icon={<RiAddFill />}
+            icon={<RiAddFill style={{ marginBottom: "-3px" }} />}
             type={ButtonType.Primary}
             handler={() => this.changeStateCreateExpense(true)}
           ></Button>

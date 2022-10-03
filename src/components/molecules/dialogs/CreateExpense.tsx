@@ -1,14 +1,17 @@
 import React from "react";
 
-import GenericDialog from "../../molecules/dialogs/GenericDialog";
+import style from "../../../css/components/CreateExpenses.module.css";
 
-import User from "../../../models/User";
-import Button from "../../atoms/Button";
 import { ButtonType } from "../../../interfaces/Button.interface";
+import User from "../../../models/User";
+
+import GenericDialog from "../../molecules/dialogs/GenericDialog";
+import Button from "../../atoms/Button";
 
 type State = {
   description: string;
-  amount: number;
+  amount?: number;
+  formError: boolean;
 };
 
 type Props = {
@@ -20,39 +23,33 @@ type Props = {
 export default class CreateExpense extends React.Component<Props, State> {
   state: State = {
     description: "",
-    amount: 0,
+    amount: undefined,
+    formError: false,
   };
 
   constructor(props: Props) {
     super(props);
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log(
-      "🚀 ~ file: CreateExpense.tsx ~ line 32 ~ CreateExpense ~ handleChange ~  event.target",
-      event.target
-    );
+    const change: any = {};
+    change[event.target.name] = event.target.value;
 
-    // const name = event.target.name;
-    // const value = event.target.value;
-    // console.log("🚀 ~ file: CreateExpense.tsx ~ line 30 ~ CreateExpense ~ handleChange ~ value", value)
-    // console.log("🚀 ~ file: CreateExpense.tsx ~ line 29 ~ CreateExpense ~ handleChange ~ name", name)
-
-    // const c: any = {}
-    // c[name] = this.state[name] += value
-    // this.setState(c);
+    this.setState(change);
   }
 
   handleSubmit() {
-    const form = {
-      description: this.state.description,
-      amount: this.state.amount,
-    };
-    console.log("An essay was submitted: ", form);
+    this.props.submit(this.state.description, this.state.amount);
 
-    this.props.submit(form);
+    this.setState({
+      description: "",
+      amount: undefined,
+    });
+
+    this.props.close();
   }
 
   render() {
@@ -61,31 +58,53 @@ export default class CreateExpense extends React.Component<Props, State> {
         title="Create expense"
         close={this.props.close}
         content={
-          <form>
-            <label>Description</label>
-            <input
-              name="description"
-              type="text"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-
-            <label>Amount</label>
-            <input
-              name="amount"
-              type="number"
-              value={this.state.amount}
-              onChange={this.handleChange}
-            />
-          </form>
+          <div>
+            <form
+              className={style.container}
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <div className={style.field} style={{ width: "70%" }}>
+                <label>Description</label>
+                <input
+                  type="text"
+                  placeholder="Foam party"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className={style.field} style={{ width: "30%" }}>
+                <label>Amount</label>
+                <input
+                  type="number"
+                  placeholder="0.00 €"
+                  name="amount"
+                  value={this.state.amount}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </form>
+          </div>
         }
-        actions={
+        actions={[
           <Button
-            text="Submit"
+            text="Crear"
             type={ButtonType.Primary}
             handler={() => this.handleSubmit()}
-          ></Button>
-        }
+            disabled={
+              !this.state.description ||
+              this.state.description.length < 8 ||
+              !this.state.amount ||
+              this.state.amount <= 0 ||
+              this.state.formError
+            }
+          ></Button>,
+          <Button
+            text="Cancelar"
+            type={ButtonType.danger}
+            handler={() => this.props.close()}
+          ></Button>,
+        ]}
       ></GenericDialog>
     );
   }

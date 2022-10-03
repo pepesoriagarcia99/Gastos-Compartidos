@@ -7,6 +7,13 @@ button {
   font-size: 18px;
 }
 
+button[disabled]{
+  cursor: default;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .primary {
   background: #007bff;
   color: #fff;

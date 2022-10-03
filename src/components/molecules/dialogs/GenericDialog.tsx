@@ -11,7 +11,7 @@ type Props = {
   title: string;
   close: Function;
   content: any;
-  actions?: any;
+  actions?: Array<any>;
 };
 
 export default class CreateExpense extends React.Component<Props, State> {
@@ -26,17 +26,19 @@ export default class CreateExpense extends React.Component<Props, State> {
           <div className={dialogStyles.modal}>
             <div className={dialogStyles.header}>
               <h5 className={dialogStyles.header_tittle}>{this.props.title}</h5>
-            </div>
-            <div className={dialogStyles.close}>
-              <Button
-                icon={<RiCloseLine />}
-                handler={() => this.props.close()}
-              ></Button>
+              <div className={dialogStyles.close}>
+                <Button
+                  icon={<RiCloseLine style={{ marginBottom: "-3px" }} />}
+                  handler={() => this.props.close()}
+                ></Button>
+              </div>
             </div>
 
             <div className={dialogStyles.content}>{this.props.content}</div>
             <div className={dialogStyles.actions}>
-              <div className={dialogStyles.actions_container}>{this.props.actions}</div>
+              <div className={dialogStyles.actions_container}>
+                {this.props.actions && this.props.actions.map((e) => e)}
+              </div>
             </div>
           </div>
         </div>

@@ -3,8 +3,8 @@ import styles from "../../css/modules/Button.module.css";
 
 import { ButtonType } from "../../interfaces/Button.interface";
 
-
 type Props = {
+  disabled?: boolean;
   text?: string;
   icon?: any;
   type?: ButtonType;
@@ -19,7 +19,8 @@ export default class Button extends React.Component<Props, {}> {
 
     return (
       <button
-        className={`${type ? styles[type] : ""}`}
+        disabled={this.props.disabled || false}
+        className={`${type ? styles[type] : ""}${icon ? " " + styles.icon : ""}`}
         onClick={() => this.props.handler()}
       >
         {text ? text : icon}
