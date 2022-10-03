@@ -111,7 +111,7 @@ export default class UserDetail extends React.Component<Props, State> {
 
                   <Button
                     icon={<RiDeleteBinFill style={{ marginBottom: "-3px" }} />}
-                    type={ButtonType.danger}
+                    type={ButtonType.Danger}
                     handler={() => this.deleteFriend(friend.id)}
                   ></Button>
                 </div>

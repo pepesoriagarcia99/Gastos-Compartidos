@@ -1,17 +1,23 @@
 import React from "react";
+import { RiDeleteBinFill } from "react-icons/ri";
+
+import moment from "moment";
 
 import styles from "../../css/components/Expenses.module.css";
 import { AvatarSize } from "../../interfaces/Avatar.interface";
 
 import Expanse from "../../models/Expense";
 import User from "../../models/User";
-import Avatar from "../atoms/Avatar";
+import { ButtonType } from "../../interfaces/Button.interface";
 
-import moment from "moment";
+import Avatar from "../atoms/Avatar";
+import Button from "../atoms/Button";
+
 
 type Props = {
   user: User;
   expense: Expanse;
+  deleteExpense: Function;
 };
 
 export default class ExpensesList extends React.Component<Props> {
@@ -65,6 +71,13 @@ export default class ExpensesList extends React.Component<Props> {
           <span className={styles.item_sub_text}>
             {this.getDate(expense.date)}
           </span>
+        </span>
+        <span style={{marginLeft: '24px'}}>
+          <Button
+            icon={<RiDeleteBinFill style={{ marginBottom: "-3px" }} />}
+            type={ButtonType.Danger}
+            handler={() => this.props.deleteExpense(this.props.expense.id)}
+          ></Button>
         </span>
       </article>
     );

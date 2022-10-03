@@ -53,11 +53,7 @@ export default class Home extends React.Component<{}, State> {
   };
 
   user: User;
-  expensesService: ExpenseServiceType = new ExpenseService(
-    user,
-    user1,
-    user2
-  );
+  expensesService: ExpenseServiceType = new ExpenseService(user, user1, user2);
 
   constructor(props: {}) {
     super(props);
@@ -68,6 +64,7 @@ export default class Home extends React.Component<{}, State> {
     this.changeStateUserDetail = this.changeStateUserDetail.bind(this);
 
     this.createNewExpense = this.createNewExpense.bind(this);
+    this.deleteExpense = this.deleteExpense.bind(this);
     this.search = this.search.bind(this);
   }
 
@@ -93,6 +90,14 @@ export default class Home extends React.Component<{}, State> {
     const current = this.state.expenses;
 
     current.push(newExpense);
+
+    this.setState({ expenses: current });
+  }
+
+  deleteExpense(id: string) {
+    const current = this.state.expenses;
+    const index: number = current.findIndex((e) => e.id === id);
+    current.splice(index, 1);
 
     this.setState({ expenses: current });
   }
@@ -131,7 +136,11 @@ export default class Home extends React.Component<{}, State> {
         </div>
         <div className={styles.container}>
           {expenses.length > 0 ? (
-            <ExpensesList user={this.user} expenses={expenses}></ExpensesList>
+            <ExpensesList
+              user={this.user}
+              expenses={expenses}
+              deleteExpense={this.deleteExpense}
+            ></ExpensesList>
           ) : (
             <span>You still have no expenses</span>
           )}
