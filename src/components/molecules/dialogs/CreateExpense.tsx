@@ -98,7 +98,7 @@ export default class CreateExpense extends React.Component<Props, State> {
           ></Button>,
           <Button
             text="Cancel"
-            type={ButtonType.danger}
+            type={ButtonType.Danger}
             handler={() => this.props.close()}
           ></Button>,
         ]}
