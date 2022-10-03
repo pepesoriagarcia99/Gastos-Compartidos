@@ -22,14 +22,14 @@ import Button from "../components/atoms/Button";
 import SearchBar from "../components/atoms/SearchBar";
 
 /** Mocks */
-const user = new User("Jose Eduardo");
-const pedro = new User("Pedro Fernandez");
-const cristina = new User("Cristina Alvarez");
-const juan = new User("Juan Carlos");
+const user = new User("José María Gutiérrez");
+const user1 = new User("Francisco Buyo");
+const user2 = new User("Alfonso Pérez");
+const user3 = new User("Raúl González");
 
-user.addFriend(pedro);
-user.addFriend(cristina);
-user.addFriend(juan);
+user.addFriend(user1);
+user.addFriend(user2);
+user.addFriend(user3);
 
 type State = {
   createExpenseIsActive: boolean;
@@ -55,8 +55,8 @@ export default class Home extends React.Component<{}, State> {
   user: User;
   expensesService: ExpenseServiceType = new ExpenseService(
     user,
-    pedro,
-    cristina
+    user1,
+    user2
   );
 
   constructor(props: {}) {
@@ -156,6 +156,7 @@ export default class Home extends React.Component<{}, State> {
         {this.state.userDetailIsActive && (
           <UserDetail
             user={this.user}
+            expenses={this.state.expenses}
             close={() => this.changeStateUserDetail(false)}
           ></UserDetail>
         )}
