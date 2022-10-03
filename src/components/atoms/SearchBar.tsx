@@ -10,7 +10,7 @@ type State = {
 };
 
 type Props = {
-  handler: Function;
+  searchAction: Function;
 };
 
 export default class SearchBar extends React.Component<Props, State> {
@@ -22,11 +22,18 @@ export default class SearchBar extends React.Component<Props, State> {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.search = this.search.bind(this);
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     this.setState({ value });
+
+    this.search(value);
+  }
+
+  search(value: string) {
+    this.props.searchAction(value);
   }
 
   render() {
@@ -34,6 +41,7 @@ export default class SearchBar extends React.Component<Props, State> {
       <div className={styles.search_bar}>
         <input
           className={styles.input}
+          placeholder="Search..."
           name="value"
           type="text"
           value={this.state.value}
@@ -42,7 +50,7 @@ export default class SearchBar extends React.Component<Props, State> {
         <div className={styles.icon}>
           <Button
             icon={<RiSearchLine />}
-            handler={() => this.props.handler(this.state.value)}
+            handler={() => this.search(this.state.value)}
           ></Button>
         </div>
       </div>

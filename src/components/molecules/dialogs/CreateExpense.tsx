@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from "../../../css/components/CreateExpenses.module.css";
+import formStyle from "../../../css/modules/Form.module.css";
 
 import { ButtonType } from "../../../interfaces/Button.interface";
 import User from "../../../models/User";
@@ -59,11 +59,8 @@ export default class CreateExpense extends React.Component<Props, State> {
         close={this.props.close}
         content={
           <div>
-            <form
-              className={style.container}
-              onSubmit={(event) => event.preventDefault()}
-            >
-              <div className={style.field} style={{ width: "70%" }}>
+            <form onSubmit={(event) => event.preventDefault()}>
+              <div className={formStyle.field} style={{ width: "70%" }}>
                 <label>Description</label>
                 <input
                   type="text"
@@ -73,7 +70,7 @@ export default class CreateExpense extends React.Component<Props, State> {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className={style.field} style={{ width: "30%" }}>
+              <div className={formStyle.field} style={{ width: "30%" }}>
                 <label>Amount</label>
                 <input
                   type="number"
@@ -88,7 +85,7 @@ export default class CreateExpense extends React.Component<Props, State> {
         }
         actions={[
           <Button
-            text="Crear"
+            text="Create"
             type={ButtonType.Primary}
             handler={() => this.handleSubmit()}
             disabled={
@@ -100,7 +97,7 @@ export default class CreateExpense extends React.Component<Props, State> {
             }
           ></Button>,
           <Button
-            text="Cancelar"
+            text="Cancel"
             type={ButtonType.danger}
             handler={() => this.props.close()}
           ></Button>,

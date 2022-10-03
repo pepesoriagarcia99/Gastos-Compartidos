@@ -1,4 +1,5 @@
 import React from "react";
+import { RiAddFill } from "react-icons/ri";
 
 import styles from "../css/views/Home.module.css";
 
@@ -7,8 +8,6 @@ import User from "../models/User";
 import Expense from "../models/Expense";
 
 /** components */
-import { RiAddFill } from "react-icons/ri";
-
 import Header from "../components/molecules/Header";
 import ExpensesList from "../components/organisms/ExpensesList";
 import CreateExpense from "../components/molecules/dialogs/CreateExpense";
@@ -38,6 +37,7 @@ type State = {
 
   expenses: Array<Expense>;
   selectedExpense?: Expense;
+  filteredExpenses: Array<Expense>;
 };
 
 export default class Home extends React.Component<{}, State> {
@@ -50,6 +50,7 @@ export default class Home extends React.Component<{}, State> {
 
     expenses: [expense1, expense2],
     selectedExpense: undefined,
+    filteredExpenses: [],
   };
 
   constructor(props: {}) {
@@ -62,6 +63,7 @@ export default class Home extends React.Component<{}, State> {
     this.changeStateExpenseDetail = this.changeStateExpenseDetail.bind(this);
 
     this.createNewExpense = this.createNewExpense.bind(this);
+    this.search = this.search.bind(this);
   }
 
   changeStateCreateExpense(state: boolean = false): void {
@@ -86,13 +88,27 @@ export default class Home extends React.Component<{}, State> {
   }
 
   search(value: string): void {
-    console.log("🚀 ~ file: Home.tsx ~ line 82 ~ Home ~ search ~ value", value);
+    if (value) {
+      const filteredExpenses = this.state.expenses
+        .slice()
+        .filter((exp) =>
+          exp.description.toLowerCase().includes(value.toLowerCase())
+        );
+      this.setState({ filteredExpenses });
+    } else {
+      this.setState({ filteredExpenses: [] });
+    }
   }
 
   render() {
-    const expenses = this.state.expenses
+    const auxExpenses =
+      this.state.filteredExpenses.length > 0
+        ? this.state.filteredExpenses
+        : this.state.expenses;
+
+    const expenses = auxExpenses
       .slice()
-      .sort((a, b) => a.date.getTime() - b.date.getTime());
+      .sort((a, b) => b.date.getTime() - a.date.getTime());
 
     return (
       <div>
@@ -101,7 +117,7 @@ export default class Home extends React.Component<{}, State> {
           userDetail={this.changeStateUserDetail}
         ></Header>
         <div className={styles.container}>
-          <SearchBar handler={this.search}></SearchBar>
+          <SearchBar searchAction={this.search}></SearchBar>
         </div>
         <div className={styles.container}>
           <ExpensesList
