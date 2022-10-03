@@ -1,0 +1,12 @@
+.btn_flotante {
+  position: fixed;
+	bottom: 40px;
+	right: 40px;
+  z-index: 10;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}

@@ -1,0 +1,35 @@
+.container {
+  width: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friends {
+  margin-top: 8px;
+  width: 90%;
+}
+
+.friends div {
+  background-color: #eee;
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+}
+
+.friends div:hover {
+  background-color: #ccc;
+}
+
+.friends div.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+form {
+  margin-top: 6px;
+}
+
+input {
+  width: 100%;
+}
