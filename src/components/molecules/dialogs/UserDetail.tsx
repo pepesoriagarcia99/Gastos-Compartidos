@@ -17,7 +17,6 @@ type State = {
   friends: Array<User>;
   nameNewFriend: string;
   personDebt: number;
-  // yourBalance: number;
 };
 
 type Props = {
@@ -31,7 +30,6 @@ export default class UserDetail extends React.Component<Props, State> {
     friends: this.props.user.friends,
     nameNewFriend: "",
     personDebt: 0,
-    // yourBalance: 0,
   };
 
   constructor(props: Props) {
