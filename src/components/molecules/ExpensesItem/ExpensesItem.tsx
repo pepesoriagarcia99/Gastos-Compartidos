@@ -3,15 +3,15 @@ import { RiDeleteBinFill } from "react-icons/ri";
 
 import moment from "moment";
 
-import styles from "../../css/components/Expenses.module.css";
-import { AvatarSize } from "../../interfaces/Avatar.interface";
+import styles from "../../../css/modules/Expenses.module.css";
+import { AvatarSize } from "../../../interfaces/Avatar.interface";
 
-import Expanse from "../../models/Expense";
-import User from "../../models/User";
-import { ButtonType } from "../../interfaces/Button.interface";
+import Expanse from "../../../models/Expense";
+import User from "../../../models/User";
+import { ButtonType } from "../../../interfaces/Button.interface";
 
-import Avatar from "../atoms/Avatar";
-import Button from "../atoms/Button";
+import Avatar from "../../atoms/Avatar/Avatar";
+import Button from "../../atoms/Button/Button";
 
 
 type Props = {

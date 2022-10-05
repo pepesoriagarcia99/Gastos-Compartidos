@@ -1,25 +1,25 @@
 import React from "react";
 import { RiAddFill } from "react-icons/ri";
 
-import styles from "../css/views/Home.module.css";
+import styles from "./Home.module.css";
 
 /** Models */
-import User from "../models/User";
-import Expense from "../models/Expense";
-import { ButtonType } from "../interfaces/Button.interface";
+import User from "../../models/User";
+import Expense from "../../models/Expense";
+import { ButtonType } from "../../interfaces/Button.interface";
 
 /** Services */
 import ExpenseService, {
   ExpenseServiceType,
-} from "../services/Expenses.service";
+} from "../../services/Expenses.service";
 
 /** components */
-import Header from "../components/molecules/Header";
-import ExpensesList from "../components/organisms/ExpensesList";
-import CreateExpense from "../components/molecules/dialogs/CreateExpense";
-import UserDetail from "../components/molecules/dialogs/UserDetail";
-import Button from "../components/atoms/Button";
-import SearchBar from "../components/atoms/SearchBar";
+import Header from "../../components/molecules/Header/Header";
+import ExpensesList from "../../components/organisms/ExpensesList/ExpensesList";
+import CreateExpense from "../../components/molecules/dialogs/CreateExpense/CreateExpense";
+import UserDetail from "../../components/molecules/dialogs/UserDetail/UserDetail";
+import Button from "../../components/atoms/Button/Button";
+import SearchBar from "../../components/atoms/SearchBar/SearchBar";
 
 /** Mocks */
 const user = new User("José María Gutiérrez");

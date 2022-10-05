@@ -4,14 +4,14 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./css/index.css";
 
-import App from "./App";
+import Home from './views/Home/Home';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Home />
   </React.StrictMode>
 );
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { RiCloseLine } from "react-icons/ri";
 
-import dialogStyles from "../../../css/modules/Dialog.module.css";
+import dialogStyles from "./GenericDialog.module.css";
 
-import Button from "../../atoms/Button";
+import Button from "../../../atoms/Button/Button";
 
 type State = {};
 
@@ -14,7 +14,7 @@ type Props = {
   actions?: Array<any>;
 };
 
-export default class CreateExpense extends React.Component<Props, State> {
+export default class GenericDialog extends React.Component<Props, State> {
   render() {
     return (
       <>

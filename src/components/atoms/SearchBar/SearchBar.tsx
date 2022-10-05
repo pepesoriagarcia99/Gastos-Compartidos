@@ -1,9 +1,9 @@
 import React from "react";
 import { RiSearchLine } from "react-icons/ri";
 
-import styles from "../../css/components/SearchBar.module.css";
+import styles from "./SearchBar.module.css";
 
-import Button from "./Button";
+import Button from "../Button/Button";
 
 type State = {
   value: string;
@@ -41,8 +41,9 @@ export default class SearchBar extends React.Component<Props, State> {
       <div className={styles.search_bar}>
         <input
           className={styles.input}
+          aria-label="search"
           placeholder="Search..."
-          name="value"
+          name="search"
           type="text"
           value={this.state.value}
           onChange={this.handleChange}

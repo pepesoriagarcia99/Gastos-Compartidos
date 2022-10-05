@@ -2,19 +2,18 @@ import React from "react";
 
 import { RiAddFill, RiDeleteBinFill } from "react-icons/ri";
 
-import style from "../../../css/components/UserDetail.module.css";
+import style from "./UserDetail.module.css";
 
-import User from "../../../models/User";
-import Expense from "../../../models/Expense";
-import { AvatarSize } from "../../../interfaces/Avatar.interface";
-import { ButtonType } from "../../../interfaces/Button.interface";
+import User from "../../../../models/User";
+import Expense from "../../../../models/Expense";
+import { AvatarSize } from "../../../../interfaces/Avatar.interface";
+import { ButtonType } from "../../../../interfaces/Button.interface";
 
-import GenericDialog from "../../molecules/dialogs/GenericDialog";
-import Avatar from "../../atoms/Avatar";
-import Button from "../../atoms/Button";
+import GenericDialog from "../GenericDialog/GenericDialog";
+import Avatar from "../../../atoms/Avatar/Avatar";
+import Button from "../../../atoms/Button/Button";
 
 type State = {
-  friends: Array<User>;
   nameNewFriend: string;
   personDebt: number;
 };
@@ -27,7 +26,6 @@ type Props = {
 
 export default class UserDetail extends React.Component<Props, State> {
   state: State = {
-    friends: this.props.user.friends,
     nameNewFriend: "",
     personDebt: 0,
   };
@@ -60,7 +58,6 @@ export default class UserDetail extends React.Component<Props, State> {
 
   deleteFriend(id: string) {
     this.props.user.deleteFriend(id);
-    this.setState({ friends: this.props.user.friends });
 
     this.calculatePersonDebt();
   }
@@ -73,7 +70,7 @@ export default class UserDetail extends React.Component<Props, State> {
     this.setState({ personDebt });
   }
 
-  getBalance(user: User): number {
+  getUserBalance(user: User): number {
     const userExpenses = this.props.expenses
       .slice()
       .filter((e) => e.creator === user);
@@ -97,15 +94,15 @@ export default class UserDetail extends React.Component<Props, State> {
             <Avatar user={this.props.user} size={AvatarSize.lg}></Avatar>
             {this.props.user.name}
             <hr></hr>
-            {<span>Your balance {this.getBalance(this.props.user)} €</span>}
+            {<span>Your balance {this.getUserBalance(this.props.user)} €</span>}
 
             <div className={style.friends}>
               <div className={style.active}>Friends</div>
               {this.props.user.friends.map((friend) => (
-                <div>
+                <div key={friend.id}>
                   {friend.name}
 
-                  <span>{this.getBalance(friend)} €</span>
+                  <span>{this.getUserBalance(friend)} €</span>
 
                   <Button
                     icon={<RiDeleteBinFill style={{ marginBottom: "-3px" }} />}
