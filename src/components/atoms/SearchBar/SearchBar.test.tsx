@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 
 jest.mock("./SearchBar.module.css", () => ({}));
@@ -24,8 +24,10 @@ describe("SearchBar", () => {
     const input = screen.getByLabelText("search");
 
     fireEvent.change(input, { target: { value: "Good Day" } });
-    await waitFor(() => {
-      expect(input).toHaveDisplayValue("Good Day");
-   });
+
+    const hasInputValue = (e: any, inputValue: string) =>
+      screen.getByDisplayValue(inputValue) === e;
+
+    expect(hasInputValue(input, "Good Day")).toBe(true)
   });
 });
