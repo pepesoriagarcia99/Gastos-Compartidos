@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Home from "./Home";
@@ -18,10 +21,7 @@ jest.mock("../../components/atoms/Button/Button", () => jest.fn());
 jest.mock("../../components/atoms/SearchBar/SearchBar", () => jest.fn());
 
 jest.mock("../../services/Expenses.service", () => ({
-  getExpenses: () => ({
-    then: () => [],
-    catch: () => ({}),
-  }),
+  getExpenses: (id: string) => jest.fn(),
 }));
 
 describe("Home", () => {

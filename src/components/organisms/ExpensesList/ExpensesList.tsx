@@ -17,7 +17,7 @@ export default class ExpensesList extends React.Component<Props> {
     return (
       <div className={styles.list}>
         {this.props.expenses.map((exp) => (
-          <div key={exp.id}>
+          <div key={exp.id} data-testid="Expense">
             <ExpanseItem
               user={this.props.user}
               expense={exp}

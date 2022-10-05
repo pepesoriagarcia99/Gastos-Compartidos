@@ -1,12 +1,19 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
 import GenericDialog from "./GenericDialog";
 
+jest.mock("./GenericDialog.module.css", () => ({}));
+jest.mock("../../../atoms/Button/Button", () => jest.fn());
 
 describe("Generic Dialog", () => {
   it("renders appropriately", () => {
-    render(<GenericDialog title="Name" close={() => {}} content={<div></div>} />);
-    expect(screen.getByText(/button/i)).toBeInTheDocument();
+    const title = "Name"
+    render(<GenericDialog title={title} close={() => {}} content={<div></div>} />);
+
+    expect(screen.getByText(title)).toBeTruthy();
   });
 });

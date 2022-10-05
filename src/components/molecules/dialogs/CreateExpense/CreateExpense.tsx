@@ -65,6 +65,7 @@ export default class CreateExpense extends React.Component<Props, State> {
                 <input
                   type="text"
                   placeholder="Foam party"
+                  aria-label="description"
                   name="description"
                   value={this.state.description}
                   onChange={this.handleChange}
@@ -75,6 +76,7 @@ export default class CreateExpense extends React.Component<Props, State> {
                 <input
                   type="number"
                   placeholder="0.00 €"
+                  aria-label="amount"
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChange}
