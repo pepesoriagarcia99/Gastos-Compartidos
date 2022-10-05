@@ -1,10 +1,10 @@
 import React from "react";
 
-import styles from "../../css/components/Header.module.css";
+import styles from "./Header.module.css";
 
-import Avatar from "../atoms/Avatar";
-import User from "../../models/User";
-import { AvatarSize } from "../../interfaces/Avatar.interface";
+import Avatar from "../../atoms/Avatar/Avatar";
+import User from "../../../models/User";
+import { AvatarSize } from "../../../interfaces/Avatar.interface";
 
 type Props = {
   user: User;

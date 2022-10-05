@@ -18,7 +18,6 @@ export default class ExpenseService {
 
   async getExpenses(userId: string): Promise<Array<Expense>> {
     return new Promise<Array<Expense>>((resolve, reject) => {
-      // const expense1 = new Expense(this.currentUser, "Cafe", 3.5);
       const expense2 = new Expense(this.user1, "Cena Montellano", 100);
       const expense3 = new Expense(this.user2, "Taxi Sevilla", 10);
       const expense4 = new Expense(this.user2, "Compra Mercadona", 53.40);

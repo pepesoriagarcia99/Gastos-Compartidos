@@ -1,12 +1,12 @@
 import React from "react";
 
-import formStyle from "../../../css/modules/Form.module.css";
+import formStyle from "../../../../css/modules/Form.module.css";
 
-import { ButtonType } from "../../../interfaces/Button.interface";
-import User from "../../../models/User";
+import { ButtonType } from "../../../../interfaces/Button.interface";
+import User from "../../../../models/User";
 
-import GenericDialog from "../../molecules/dialogs/GenericDialog";
-import Button from "../../atoms/Button";
+import GenericDialog from "../GenericDialog/GenericDialog";
+import Button from "../../../atoms/Button/Button";
 
 type State = {
   description: string;
@@ -65,6 +65,7 @@ export default class CreateExpense extends React.Component<Props, State> {
                 <input
                   type="text"
                   placeholder="Foam party"
+                  aria-label="description"
                   name="description"
                   value={this.state.description}
                   onChange={this.handleChange}
@@ -75,6 +76,7 @@ export default class CreateExpense extends React.Component<Props, State> {
                 <input
                   type="number"
                   placeholder="0.00 €"
+                  aria-label="amount"
                   name="amount"
                   value={this.state.amount}
                   onChange={this.handleChange}
@@ -85,6 +87,7 @@ export default class CreateExpense extends React.Component<Props, State> {
         }
         actions={[
           <Button
+            key="create"
             text="Create"
             type={ButtonType.Primary}
             handler={() => this.handleSubmit()}
@@ -97,6 +100,7 @@ export default class CreateExpense extends React.Component<Props, State> {
             }
           ></Button>,
           <Button
+            key="cancel"
             text="Cancel"
             type={ButtonType.Danger}
             handler={() => this.props.close()}

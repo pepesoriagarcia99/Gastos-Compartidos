@@ -1,5 +1,4 @@
 .search_bar {
-  /* display: grid; */
   display: flex;
   align-items: center;
   width: 50vh;

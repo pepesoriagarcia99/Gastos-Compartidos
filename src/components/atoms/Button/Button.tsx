@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../../css/modules/Button.module.css";
+import styles from "./Button.module.css";
 
-import { ButtonType } from "../../interfaces/Button.interface";
+import { ButtonType } from "../../../interfaces/Button.interface";
 
 type Props = {
   disabled?: boolean;
